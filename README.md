@@ -25,7 +25,7 @@ Paper/Spigot **1.21.4** API'si ve native **Kyori Adventure** (MiniMessage) mesaj
 
 ## ⚙️ Kurulum
 
-1. [Releases](../../releases) sayfasından ya da kendi derlediğiniz `YerSil-1.0.0.jar` dosyasını indirin.
+1. [Releases](../../releases) sayfasından ya da kendi derlediğiniz `YerSil-1.0.1.jar` dosyasını indirin.
 2. Sunucunuzun `plugins/` klasörüne atın.
 3. Sunucuyu başlatın/reload edin — `plugins/YerSil/config.yml` otomatik oluşturulacaktır.
 4. Gerekirse `config.yml` üzerinden süre ve mesaj şablonlarını özelleştirin.
