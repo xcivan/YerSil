@@ -10,7 +10,7 @@ Paper/Spigot **1.21.4** API'si ve native **Kyori Adventure** (MiniMessage) mesaj
 ## ✨ Özellikler
 
 - ⏱️ **Otomatik Temizlik**: `config.yml` üzerinden ayarlanabilir periyotta (varsayılan 300 saniye) yerdeki eşyaları temizler.
-- 📢 **Action Bar Geri Sayımı**: Temizliğe 20 saniye kala her saniye azalan geri sayım, sohbeti kirletmeden Action Bar üzerinden gösterilir.
+- 📢 **Action Bar Geri Sayımı**: Temizliğe 30 saniye kala her saniye azalan geri sayım, sohbeti kirletmeden Action Bar üzerinden gösterilir.
 - 🎨 **DragonCraft Teması**: Gold (`#FFA800`) ve Aqua (`#55FFFF`) renk paleti, tamamen MiniMessage formatında.
 - 🚀 **Performans Odaklı**: Yerdeki eşyalar taranırken sadece yüklü chunk'lar gezilir, gereksiz nesne üretimi yapılmaz.
 - 🔧 **Runtime Komutları**: Süreyi veya anlık temizliği sunucuyu yeniden başlatmadan yönetebilirsiniz.
