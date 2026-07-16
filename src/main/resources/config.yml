@@ -1,0 +1,39 @@
+# =========================================================
+#   YerSil - DragonCraft
+#   Renk kodları MiniMessage formatındadır.
+#   Gold  -> #FFA800   |   Aqua -> #55FFFF
+# =========================================================
+
+# Yerdeki eşyaların kaç saniyede bir temizleneceği (varsayılan: 300 saniye = 5 dakika)
+temizleme-periyodu-saniye: 600
+
+# Geri sayımın kaç saniye kala Action Bar'da gösterilmeye başlayacağı
+geri-sayim-baslangic-saniye: 30
+
+mesajlar:
+  # Her saniye Action Bar'da gösterilen geri sayım mesajı. {saniye} yerine kalan süre yazılır.
+  geri-sayim-actionbar: "<bold><dark_red>DragonCraft</dark_red></bold>  <gray>Yerdeki eşyalar <red>{saniye}</red> saniye içinde temizlenecek!</gray>"
+
+  # Temizlik işlemi tamamlandığında tüm sunucuya (chat) atılan mesaj.
+  temizlik-tamamlandi: "<bold><dark_red>DragonCraft</dark_red></bold>  <gray>Yerdeki <red>{adet}</red> eşya başarıyla temizlendi!</gray>"
+
+  # /yersil komutu ile manuel temizlik yapıldığında komutu çalıştıran kişiye gösterilen actionbar mesajı.
+  manuel-temizlik-actionbar: "<bold><dark_red>DragonCraft</dark_red></bold>  <gray>Yerdeki eşyalar manuel olarak temizlendi ve zamanlayıcı sıfırlandı!</gray>"
+
+  # /yersil komutu ile manuel temizlik yapıldığında sunucuya (chat) duyurulan mesaj.
+  manuel-temizlik-chat: "<bold><dark_red>DragonCraft</dark_red></bold>  <gray><red>{oyuncu}</red> tarafından yerdeki <red>{adet}</red> eşya manuel olarak temizlendi.</gray>"
+
+  # /yersilsure <saniye> komutu başarılı şekilde çalıştığında gösterilen mesaj.
+  sure-guncellendi: "<bold><dark_red>DragonCraft</dark_red></bold>  <gray>Temizleme periyodu başarıyla <red>{saniye}</red> saniye olarak güncellendi ve zamanlayıcı yeniden başlatıldı!</gray>"
+
+  # Yetkisiz kullanım mesajı.
+  yetki-yok: "<bold><dark_red>DragonCraft</dark_red></bold>  <gray>Bu komutu kullanmak için yetkiniz bulunmamaktadır!</gray>"
+
+  # /yersilsure komutu hatalı kullanıldığında (parametre eksik/hatalı) gösterilen mesaj.
+  hatali-kullanim: "<bold><dark_red>DragonCraft</dark_red></bold>  <gray>Hatalı kullanım! Doğru kullanım: <red>/yersilsure &lt;saniye&gt;</red></gray>"
+  
+  # Girilen saniye değeri sayı değilse veya 0/negatif ise gösterilen mesaj.
+  hatali-sayi: "<bold><dark_red>DragonCraft</dark_red></bold>  <gray>Lütfen geçerli ve pozitif bir sayı giriniz! Örnek: <red>/yersilsure 300</red></gray>"
+
+  # Sadece oyuncuların kullanabileceği bir yerde konsoldan komut çalıştırılırsa (actionbar gerektiren durumlar için bilgilendirme).
+  sadece-konsol-bilgi: "<bold><dark_red>DragonCraft</dark_red></bold>  <gray>İşlem konsoldan başarıyla gerçekleştirildi.</gray>"

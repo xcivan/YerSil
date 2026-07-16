@@ -1,0 +1,25 @@
+name: YerSil
+version: '${project.version}'
+main: com.dragoncraft.yersil.Main
+api-version: '1.21'
+author: DragonCraft
+description: DragonCraft sunucusu icin performans odakli ClearLag alternatifi item temizleyici plugin.
+folia-supported: false
+
+commands:
+  yersil:
+    description: Yerdeki tum drop edilmis esyalari aninda temizler ve zamanlayiciyi sifirlar. "reload" argumani ile config.yml yeniden yuklenir.
+    usage: /yersil [reload]
+    permission: yersil.komut
+    permission-message: '§cBu komutu kullanma yetkiniz yok!'
+  yersilsure:
+    description: Esya silme periyodunu (saniye) runtime'da gunceller.
+    usage: /yersilsure <saniye>
+    permission: yersil.komut
+    permission-message: '§cBu komutu kullanma yetkiniz yok!'
+    aliases: [yersilsüre]
+
+permissions:
+  yersil.komut:
+    description: YerSil pluginine ait tum komutlari kullanma yetkisi.
+    default: op
