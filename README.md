@@ -13,6 +13,7 @@ Paper/Spigot **1.21.4** API'si ve native **Kyori Adventure** (MiniMessage) mesaj
 - 📢 **Action Bar Geri Sayımı**: Temizliğe 30 saniye kala her saniye azalan geri sayım, sohbeti kirletmeden Action Bar üzerinden gösterilir.
 - 🎨 **DragonCraft Teması**: Gold (`#FFA800`) ve Aqua (`#55FFFF`) renk paleti, tamamen MiniMessage formatında.
 - 🚀 **Performans Odaklı**: Yerdeki eşyalar taranırken sadece yüklü chunk'lar gezilir, gereksiz nesne üretimi yapılmaz.
+- 🧊 **Spike Önleme (Kademeli Silme)**: Diğer ClearLag benzeri pluginlerin en büyük sorunu, binlerce eşyayı tek bir tick'te silmeye çalışıp sunucuda ani donma (spike) yaratmasıdır. YerSil, eşyaları önce tespit eder, ardından `config.yml`'deki `batch-boyutu` kadarını her tick'te siler ve geri kalanını sonraki tick'lere yayar — böylece kalabalık/farm sunucularında bile ana thread hiçbir anda aşırı yüklenmez.
 - 🔧 **Runtime Komutları**: Süreyi veya anlık temizliği sunucuyu yeniden başlatmadan yönetebilirsiniz.
 
 ## 📋 Komutlar
@@ -25,7 +26,7 @@ Paper/Spigot **1.21.4** API'si ve native **Kyori Adventure** (MiniMessage) mesaj
 
 ## ⚙️ Kurulum
 
-1. [Releases](../../releases) sayfasından ya da kendi derlediğiniz `YerSil-1.0.1.jar` dosyasını indirin.
+1. [Releases](../../releases) sayfasından ya da kendi derlediğiniz `YerSil-1.0.2.jar` dosyasını indirin.
 2. Sunucunuzun `plugins/` klasörüne atın.
 3. Sunucuyu başlatın/reload edin — `plugins/YerSil/config.yml` otomatik oluşturulacaktır.
 4. Gerekirse `config.yml` üzerinden süre ve mesaj şablonlarını özelleştirin.
@@ -50,4 +51,4 @@ YerSil/
 
 ## 📄 Lisans
 
-Bu proje [MIT Lisansı](LICENSE) ile lisanslanmıştır.
+Bu proje [MIT Lisansı](LICENSE) ile lisanslanmıştır — dilediğiniz gibi kullanabilir, değiştirebilir ve dağıtabilirsiniz.

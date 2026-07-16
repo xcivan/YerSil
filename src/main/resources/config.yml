@@ -1,14 +1,21 @@
 # =========================================================
-#   YerSil - DragonCraft
-#   Renk kodları MiniMessage formatındadır.
+#   YerSil - DragonCraft ClearLag Alternatifi
+#   Renk kodlari MiniMessage formatindadir.
 #   Gold  -> #FFA800   |   Aqua -> #55FFFF
 # =========================================================
 
-# Yerdeki eşyaların kaç saniyede bir temizleneceği (varsayılan: 300 saniye = 5 dakika)
-temizleme-periyodu-saniye: 600
+# Yerdeki esyalarin kac saniyede bir temizlenecegi (varsayilan: 300 saniye = 5 dakika)
+temizleme-periyodu-saniye: 300
 
-# Geri sayımın kaç saniye kala Action Bar'da gösterilmeye başlayacağı
+# Geri sayimin kac saniye kala Action Bar'da gosterilmeye baslayacagi
 geri-sayim-baslangic-saniye: 30
+
+# SPIKE ONLEME (performans): Temizlik tetiklendiginde binlerce esya varsa hepsini
+# TEK BIR TICK'TE silmek sunucuda ani donma (spike) yaratabilir. Bu yuzden esyalar
+# once tespit edilir, sonra her tick'te en fazla bu kadari silinir ve geri kalani
+# sonraki tick'lere yayilir. Guclu sunucularda bu degeri artirabilir (ornek: 200-300),
+# zayif/paylasimli sunucularda dusurebilirsiniz (ornek: 50).
+batch-boyutu: 100
 
 mesajlar:
   # Her saniye Action Bar'da gösterilen geri sayım mesajı. {saniye} yerine kalan süre yazılır.
@@ -37,3 +44,6 @@ mesajlar:
 
   # Sadece oyuncuların kullanabileceği bir yerde konsoldan komut çalıştırılırsa (actionbar gerektiren durumlar için bilgilendirme).
   sadece-konsol-bilgi: "<bold><dark_red>DragonCraft</dark_red></bold>  <gray>İşlem konsoldan başarıyla gerçekleştirildi.</gray>"
+
+  # /yersil reload komutu calistirildiginda gosterilen mesaj.
+  config-yenilendi: "<bold><dark_red>DragonCraft</dark_red></bold> <gray>Config başarıyla yeniden yüklendi ve zamanlayıcı tazelendi!</gray>"
