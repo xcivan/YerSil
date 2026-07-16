@@ -47,6 +47,13 @@ public class ClearManager {
     private int timeLeft;           // bir sonraki temizlige kalan sure (saniye)
     private int batchSize;          // her tick'te en fazla silinecek esya adedi (spike onleme)
 
+    // ONBELLEK (cache): Bu mesaj sablonlari saniyede bir (geri sayim boyunca) veya her periyotta
+    // kullanildigi icin, config.getString(...) cagrisini her seferinde tekrarlamak yerine SADECE
+    // reload sirasinda bir kere okunup burada tutulur. Boylece sunucu ayakta oldugu surece surekli
+    // tekrarlanan gereksiz config/harita aramasi (map lookup) onlenmis olur.
+    private String countdownTemplate;
+    private String clearBroadcastTemplate;
+
     public ClearManager(Main plugin) {
         this.plugin = plugin;
         reloadSettings();
@@ -56,8 +63,24 @@ public class ClearManager {
     private void reloadSettings() {
         FileConfiguration config = plugin.getConfig();
         this.periodSeconds = Math.max(1, config.getInt("temizleme-periyodu-saniye", 300));
-        this.countdownStart = Math.max(1, config.getInt("geri-sayim-baslangic-saniye", 20));
+
+        // Guvenlik: geri sayim esigi periyottan buyuk olamaz, aksi halde her tick'te
+        // sonsuz geri sayim gorunumu olusur. Boyle bir yanlis yapilandirma varsa otomatik duzeltilir.
+        int rawCountdownStart = Math.max(1, config.getInt("geri-sayim-baslangic-saniye", 20));
+        this.countdownStart = Math.min(rawCountdownStart, this.periodSeconds);
+
         this.batchSize = Math.max(1, config.getInt("batch-boyutu", 100));
+
+        // Mesaj sablonlarini bir kerede onbellege aliyoruz (bkz. field aciklamasi).
+        this.countdownTemplate = config.getString(
+                "mesajlar.geri-sayim-actionbar",
+                "<gold>[DragonCraft]</gold> <aqua>Yerdeki esyalar {saniye} saniye icinde temizlenecek!</aqua>"
+        );
+        this.clearBroadcastTemplate = config.getString(
+                "mesajlar.temizlik-tamamlandi",
+                "<gold>[DragonCraft]</gold> <aqua>Yerdeki {adet} esya basariyla temizlendi!</aqua>"
+        );
+
         this.timeLeft = this.periodSeconds;
     }
 
@@ -198,10 +221,9 @@ public class ClearManager {
 
     /**
      * "/yersil reload" komutu icin: config.yml dosyasini diskten yeniden okur
-     * (plugin.reloadConfig()), periyot/geri-sayim ayarlarini tazeler ve
-     * zamanlayiciyi yeni degerlere gore sifirdan baslatir. Mesaj sablonlari
-     * zaten her yayinlamada anlik olarak config'den okundugu icin ayrica
-     * islem yapmaya gerek yoktur.
+     * (plugin.reloadConfig()), periyot/geri-sayim/batch ayarlarini VE onbellege
+     * alinmis mesaj sablonlarini tazeler, ardindan zamanlayiciyi yeni degerlere
+     * gore sifirdan baslatir.
      */
     public void reloadFromDisk() {
         plugin.reloadConfig();
@@ -213,11 +235,8 @@ public class ClearManager {
 
     /** Her tick'te tum oyunculara Action Bar uzerinden geri sayim mesaji gonderir (chat kirliligi yok). */
     private void broadcastCountdown(int secondsLeft) {
-        String rawTemplate = plugin.getConfig().getString(
-                "mesajlar.geri-sayim-actionbar",
-                "<gold>[DragonCraft]</gold> <aqua>Yerdeki esyalar {saniye} saniye icinde temizlenecek!</aqua>"
-        );
-        Component message = miniMessage.deserialize(rawTemplate.replace("{saniye}", String.valueOf(secondsLeft)));
+        // Sablon artik config'den degil, reload sirasinda doldurulmus onbellekten okunuyor.
+        Component message = miniMessage.deserialize(countdownTemplate.replace("{saniye}", String.valueOf(secondsLeft)));
 
         for (Player player : Bukkit.getOnlinePlayers()) {
             player.sendActionBar(message);
@@ -226,11 +245,7 @@ public class ClearManager {
 
     /** Temizlik tamamlandiginda tum sunucuya chat uzerinden bilgi verir. */
     private void broadcastClearMessage(int clearedCount) {
-        String rawTemplate = plugin.getConfig().getString(
-                "mesajlar.temizlik-tamamlandi",
-                "<gold>[DragonCraft]</gold> <aqua>Yerdeki {adet} esya basariyla temizlendi!</aqua>"
-        );
-        Component message = miniMessage.deserialize(rawTemplate.replace("{adet}", String.valueOf(clearedCount)));
+        Component message = miniMessage.deserialize(clearBroadcastTemplate.replace("{adet}", String.valueOf(clearedCount)));
 
         Bukkit.broadcast(message);
     }
